@@ -13,4 +13,6 @@ public class UICompanentVisitor : ICompanentVisitor {
     public void Visit(UICompanentConfig companent) => Visit((dynamic)companent);
 
     public void Visit(SelectorViewConfig selectorView) => Companent = _companents.FirstOrDefault(companent => companent is SelectorView);
+    public void Visit(PolyhedraViewConfig polyhedraView) => Companent = _companents.FirstOrDefault(companent => companent is PolyhedraView);
+    public void Visit(PolyhedraWidgetConfig polyhedraWidget) => Companent = _companents.FirstOrDefault(companent => companent is PolyhedraWidget);
 }

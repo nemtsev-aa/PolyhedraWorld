@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bootstrapper : MonoBehaviour {
     [SerializeField] private UIManager _uIManager;
     [SerializeField] private DialogSelectorViewConfigs _selectorViewConfigs;
+    [SerializeField] private PolyhedraModelConfigs _polyhedraModelConfigs;
 
     [SerializeField] private DialogFactory _dialogFactory;
     [SerializeField] private UICompanentsFactory _companentsFactory;
@@ -13,7 +14,6 @@ public class Bootstrapper : MonoBehaviour {
     private DialogSwitcher _dialogSwitcher;
 
     private void Start() {
-        
         _dialogSwitcher = new DialogSwitcher(_dialogFactory, _uIManager.DialogsParent, _uIManager.SwitcherView);
         _dialogMediator = new DialogMediator(_dialogSwitcher);
 

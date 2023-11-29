@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 
 public class ColorChanger : MonoBehaviour {
-    [SerializeField] private Color _endColor = Color.clear;
     [SerializeField] private float _duration = 1f;
 
     private Material _material;
@@ -19,7 +18,7 @@ public class ColorChanger : MonoBehaviour {
         if (_fadeRoutine != null)
             StopCoroutine(_fadeRoutine);
 
-        _fadeRoutine = StartCoroutine(FadeColor(_endColor));
+        _fadeRoutine = StartCoroutine(ShowEffect());
     }
 
     public void StopChangingColor() {
@@ -30,27 +29,11 @@ public class ColorChanger : MonoBehaviour {
         }
     }
 
-    private void Update() {
-        if (_fadeRoutine == null)
-            return;
-
-        if (_material.color == _startColor) {
-            StartCoroutine(FadeColor(_endColor));
-        }
-        else if (_material.color == _endColor) {
-            StartCoroutine(FadeColor(_startColor));
-        }
-    }
-
-    private IEnumerator FadeColor(Color targetColor) {
-        float time = 0;
-
-        while (time < _duration) {
-            _material.color = Color.Lerp(_material.color, targetColor, time / _duration);
-            time += Time.deltaTime;
+    private IEnumerator ShowEffect() {
+        for (float t = 0; t < _duration; t += Time.deltaTime) {
+            _material.SetColor("_EmissionColor", new Color(Mathf.Sin(30 * t) * 0.5f + 0.5f, 0, 0, 0));
+            
             yield return null;
         }
-
-        _material.color = targetColor;
     }
 }

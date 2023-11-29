@@ -1,4 +1,4 @@
-public enum PolyhedraType {
+public enum PolyhedraTypes {
     Cube,
     Tetrahedron,
     Octahedron,

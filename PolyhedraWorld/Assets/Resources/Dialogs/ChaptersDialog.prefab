@@ -2925,8 +2925,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4349986724937157459}
+  - component: {fileID: 9113740678149194735}
   m_Layer: 0
-  m_Name: "\u0421haptersPanel"
+  m_Name: PolyhedrasPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2953,6 +2954,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &9113740678149194735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4349986724937157460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a67a9c5f84094f4288c10369befad07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _polyhedraViewParent: {fileID: 8068297597158998701}
+  _polyhedraViewGroup: {fileID: 8068297597158998703}
 --- !u!1 &4349986725117626759
 GameObject:
   m_ObjectHideFlags: 0
@@ -3244,8 +3259,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowDialogSwitcher: {fileID: 8555388353109529078}
-  Panels: []
-  _companentsFactory: {fileID: 0}
+  Panels:
+  - {fileID: 9113740678149194735}
+  _companentsFactory: {fileID: 11400000, guid: 0d41fd04699859e498c4cd91d3497aa7, type: 2}
+  _polyhedraConfigs: {fileID: 11400000, guid: 22f1a7340de63584ba0824b221fa912c, type: 2}
 --- !u!1 &4349986726093525626
 GameObject:
   m_ObjectHideFlags: 0
@@ -5428,7 +5445,7 @@ GameObject:
   - component: {fileID: 8068297597156949063}
   - component: {fileID: 8068297597156949062}
   m_Layer: 0
-  m_Name: "\u0421haptersList (Scroll View)"
+  m_Name: PolyhedrasList (Scroll View)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
