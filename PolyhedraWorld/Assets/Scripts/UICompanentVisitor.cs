@@ -12,5 +12,5 @@ public class UICompanentVisitor : ICompanentVisitor {
 
     public void Visit(UICompanentConfig companent) => Visit((dynamic)companent);
 
-    
+    public void Visit(SelectorViewConfig selectorView) => Companent = _companents.FirstOrDefault(companent => companent is SelectorView);
 }

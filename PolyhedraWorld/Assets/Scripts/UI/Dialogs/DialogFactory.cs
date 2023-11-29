@@ -11,9 +11,8 @@ public class DialogFactory : ScriptableObject {
 
     private static readonly Dictionary<Type, string> _prefabsDictionary = new Dictionary<Type, string>() {
             {typeof(DesktopDialog),"DesktopDialog"},
-            {typeof(TransactionsDialog),"TransactionsDialog"},
-            {typeof(CategoryDialog),"CategoryDialog"},
-            {typeof(FinancialGoalsDialog),"FinancialGoalsDialog"},
+            {typeof(ChaptersDialog),"ChaptersDialog"},
+            {typeof(SpecificationDialog),"SpecificationDialog"},
             {typeof(SettingsDialog),"SettingsDialog"},
             {typeof(AboutDialog),"AboutDialog"},
     };

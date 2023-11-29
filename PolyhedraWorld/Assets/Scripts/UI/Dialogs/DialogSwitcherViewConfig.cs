@@ -5,7 +5,7 @@ using System;
 public class DialogSwitcherViewConfig : UICompanentConfig {
     [field: SerializeField] public Color BackgroundColor { get; private set; }
     [field: SerializeField] public Sprite Frame { get; private set; }
-    public SelectorViewConfigs Configs { get; private set; }
+    public DialogSelectorViewConfigs Configs { get; private set; }
     
     public override void OnValidate() {
         if (BackgroundColor == Color.clear)
@@ -15,7 +15,7 @@ public class DialogSwitcherViewConfig : UICompanentConfig {
             throw new ArgumentNullException($"{Frame}: is null");
     }
 
-    public void Init(SelectorViewConfigs configs) {
+    public void Init(DialogSelectorViewConfigs configs) {
         Configs = configs;
     }
 }

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06952cba637b6a34692697e9e75d5ddc, type: 3}
+  m_Name: DialogSelectorViewConfigs
+  m_EditorClassIdentifier: 
+  <HeaderColor>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <Configs>k__BackingField:
+  - <Type>k__BackingField: 0
+    <Name>k__BackingField: "\u0413\u043B\u0430\u0432\u043D\u043E\u0435 \u043C\u0435\u043D\u044E"
+    <Icon>k__BackingField: {fileID: 21300000, guid: 1aea661b59bb61d46b6f9d61f50e4d76,
+      type: 3}
+  - <Type>k__BackingField: 1
+    <Name>k__BackingField: "\u0413\u0430\u043B\u0435\u0440\u0435\u044F"
+    <Icon>k__BackingField: {fileID: 21300000, guid: 10c9a4af41fb70248a270263c874598a,
+      type: 3}
+  - <Type>k__BackingField: 2
+    <Name>k__BackingField: "\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u043E\u0441\u0442\u0438"
+    <Icon>k__BackingField: {fileID: 21300000, guid: ff649e0191bde3148aebce632f0974e1,
+      type: 3}
+  - <Type>k__BackingField: 3
+    <Name>k__BackingField: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
+    <Icon>k__BackingField: {fileID: 21300000, guid: a797b1fa46be38c4f89280b17eb85cf2,
+      type: 3}
+  - <Type>k__BackingField: 4
+    <Name>k__BackingField: "\u0410\u0432\u0442\u043E\u0440\u044B"
+    <Icon>k__BackingField: {fileID: 21300000, guid: 556223a2fd9a9a840ac8f660c5f23168,
+      type: 3}

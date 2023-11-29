@@ -25,10 +25,9 @@ public class DialogSwitcher {
 
     private void CreateDialogs() {
         _dialogsDictionary = new Dictionary<DialogTypes, Dialog> {
-            { DialogTypes.DesktopDialog, _dialogFactory.GetDialog<DesktopDialog>(_dialogsParent)},
-            { DialogTypes.Transactions, _dialogFactory.GetDialog<TransactionsDialog>(_dialogsParent)},
-            { DialogTypes.Category, _dialogFactory.GetDialog<CategoryDialog>(_dialogsParent)},
-            { DialogTypes.FinancialGoals, _dialogFactory.GetDialog<FinancialGoalsDialog>(_dialogsParent)},
+            { DialogTypes.Desktop, _dialogFactory.GetDialog<DesktopDialog>(_dialogsParent)},
+            { DialogTypes.Chapters, _dialogFactory.GetDialog<ChaptersDialog>(_dialogsParent)},
+            { DialogTypes.Specification, _dialogFactory.GetDialog<SpecificationDialog>(_dialogsParent)},
             { DialogTypes.Settings, _dialogFactory.GetDialog<SettingsDialog>(_dialogsParent)},
             { DialogTypes.About, _dialogFactory.GetDialog<AboutDialog>(_dialogsParent)}
         };

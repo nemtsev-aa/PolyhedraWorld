@@ -14,9 +14,9 @@ public class DialogTypeVisitor : IDialogTypeVisitor {
 
     public void Visit(DesktopDialog desktop) => Dialog = _dialogs.FirstOrDefault(dialog => dialog is DesktopDialog);
 
-    public void Visit(TransactionsDialog transactions) => Dialog = _dialogs.FirstOrDefault(dialog => dialog is TransactionsDialog);
+    public void Visit(ChaptersDialog transactions) => Dialog = _dialogs.FirstOrDefault(dialog => dialog is ChaptersDialog);
 
-    public void Visit(CategoryDialog category) => Dialog = _dialogs.FirstOrDefault(dialog => dialog is CategoryDialog);
+    public void Visit(SpecificationDialog category) => Dialog = _dialogs.FirstOrDefault(dialog => dialog is SpecificationDialog);
 
     public void Visit(FinancialGoalsDialog financialGoals) => Dialog = _dialogs.FirstOrDefault(dialog => dialog is FinancialGoalsDialog);
 

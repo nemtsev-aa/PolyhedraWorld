@@ -10,7 +10,7 @@ public class DialogSwitcherView : UICompanent, IDisposable {
     [SerializeField] private RectTransform _selectorsParent;
     [SerializeField] private Button _hideView
         ;
-    private SelectorViewConfigs _selectorViewConfigs;
+    private DialogSelectorViewConfigs _selectorViewConfigs;
     private UICompanentsFactory _companentsFactory;
     private List<SelectorView> _selectors;
 
@@ -18,7 +18,7 @@ public class DialogSwitcherView : UICompanent, IDisposable {
     [field: SerializeField] public Image BackgroundImage { get; private set; }
     
 
-    public void Init(SelectorViewConfigs selectorViewConfigs, UICompanentsFactory companentsFactory) {
+    public void Init(DialogSelectorViewConfigs selectorViewConfigs, UICompanentsFactory companentsFactory) {
         _selectorViewConfigs = selectorViewConfigs;
         _companentsFactory = companentsFactory;
 

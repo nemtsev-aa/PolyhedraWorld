@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour, IDisposable {
-    private SelectorViewConfigs _selectorViewConfigs;
+    private DialogSelectorViewConfigs _selectorViewConfigs;
     private UICompanentsFactory _companentsFactory;
     private DialogSwitcher _dialogSwitcher;
     private DialogMediator _dialogMediator;
@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour, IDisposable {
     [field: SerializeField] public RectTransform DialogsParent { get; private set; }
     [field: SerializeField] public DialogSwitcherView SwitcherView { get; private set; }
     
-    public void Init(SelectorViewConfigs selectorViewConfigs, UICompanentsFactory companentsFactory, DialogSwitcher dialogSwitcher, DialogMediator dialogMedialor) {
+    public void Init(DialogSelectorViewConfigs selectorViewConfigs, UICompanentsFactory companentsFactory, DialogSwitcher dialogSwitcher, DialogMediator dialogMedialor) {
         _selectorViewConfigs = selectorViewConfigs;
         _companentsFactory = companentsFactory;
         _dialogSwitcher = dialogSwitcher;

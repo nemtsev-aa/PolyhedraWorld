@@ -1,8 +1,7 @@
 public enum DialogTypes {
-    DesktopDialog,
-    Transactions,
-    Category,
-    FinancialGoals,
+    Desktop,
+    Chapters,
+    Specification,
     Settings,
     About
 }
