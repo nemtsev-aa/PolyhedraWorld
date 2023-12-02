@@ -1,25 +1,46 @@
 using System;
-using UnityEngine;
 
 public class SpecificationDialog : Dialog {
-    [SerializeField] private UICompanentsFactory _companentsFactory;
+    public event Action<PolyhedraConfig> PolyhedraConfigChanged;
+    public event Action<PolyhedrasCompanentTypes> PolyhedraCompanentSelected;
 
-    public override void Init(DialogMediator mediator) {
-        if (IsInit == true)
-            return;
+    private ToolsPanel _toolsPanel;
+    private ViewsManager _viewsManager;
+    private PolyhedraConfig _config;
 
-        base.Init(mediator);
+    public override void Init() {
+        base.Init();
+    }
 
-        IsInit = true;
+    public override void InitializationPanels() {
+        _toolsPanel = GetPanelByType<ToolsPanel>();
+        _toolsPanel.Init(this);
+
+        _viewsManager = GetPanelByType<ViewsManager>();
+        _viewsManager.Init(this);
     }
 
     public override void AddListeners() {
         base.AddListeners();
 
+        _toolsPanel.ToolSelected += OnToolSelected;
+        _viewsManager.PolyhedrasCompanentBlinked += OnPolyhedrasCompanentBlinked;
     }
 
     public override void RemoveListeners() {
         base.RemoveListeners();
 
+        _toolsPanel.ToolSelected -= OnToolSelected;
+        _viewsManager.PolyhedrasCompanentBlinked -= OnPolyhedrasCompanentBlinked;
     }
+
+    public void SetPolyhedraConfig(PolyhedraConfig config) {
+        _config = config;
+        PolyhedraConfigChanged?.Invoke(_config);
+    }
+
+    private void OnToolSelected(Type type) => _viewsManager.ShowViewByType(type);
+
+
+    private void OnPolyhedrasCompanentBlinked(PolyhedrasCompanentTypes type) => PolyhedraCompanentSelected?.Invoke(type);
 }

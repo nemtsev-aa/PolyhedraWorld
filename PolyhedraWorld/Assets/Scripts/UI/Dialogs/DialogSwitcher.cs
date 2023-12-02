@@ -1,61 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-
+﻿
 public class DialogSwitcher {
-    private RectTransform _dialogsParent;
-    private DialogFactory _dialogFactory;
+    private UIManager _uIManager;
     private Dialog _activeDialog;
 
-    private Dictionary<DialogTypes, Dialog> _dialogsDictionary;
-    private DialogSwitcherView _dialogSwitcherView;
-
-    public DialogSwitcher(DialogFactory dialogFactory, RectTransform dialogsParent, DialogSwitcherView dialogSwitcherView) {
-        _dialogFactory = dialogFactory;
-        _dialogsParent = dialogsParent;
-
-        _dialogFactory.Init(_dialogsParent);
-
-        _dialogSwitcherView = dialogSwitcherView;
-        _dialogSwitcherView.ActiveSelectorChanged += OnActiveSelectorChanged;
-
-        CreateDialogs();
-    }
-
-    private void CreateDialogs() {
-        _dialogsDictionary = new Dictionary<DialogTypes, Dialog> {
-            { DialogTypes.Desktop, _dialogFactory.GetDialog<DesktopDialog>(_dialogsParent)},
-            { DialogTypes.Chapters, _dialogFactory.GetDialog<ChaptersDialog>(_dialogsParent)},
-            { DialogTypes.Specification, _dialogFactory.GetDialog<SpecificationDialog>(_dialogsParent)},
-            { DialogTypes.Settings, _dialogFactory.GetDialog<SettingsDialog>(_dialogsParent)},
-            { DialogTypes.About, _dialogFactory.GetDialog<AboutDialog>(_dialogsParent)}
-        };
-
-        foreach (var iDialog in _dialogsDictionary.Values) {
-            iDialog.Close();
-        }
-    }
-
-    public Dialog GetDialogByType(DialogTypes type) {
-        if (_dialogsDictionary.Keys.Count == 0)
-            throw new ArgumentNullException("DialogsDictionary is empty");
-
-        return _dialogsDictionary[type];
+    public DialogSwitcher(UIManager uIManager) {
+        _uIManager = uIManager;
     }
 
     public void ShowDialog(DialogTypes type) {
-        if (_activeDialog != null) _activeDialog.Show(false);
-        _activeDialog = GetDialogByType(type);
-
+        if (_activeDialog != null)
+            _activeDialog.Show(false);
+        
+        _activeDialog = _uIManager.GetDialogByType(type);
         _activeDialog.Show(true);
     }
-
-    public List<Dialog> GetDialogList() {
-        return _dialogsDictionary.Values.ToList();
-    }
-
-    public void ShowDialogSwitcherView() => _dialogSwitcherView.Show(true);
-    private void OnActiveSelectorChanged(SelectorView selectorView) => ShowDialog(selectorView.Config.Type);
 
 }

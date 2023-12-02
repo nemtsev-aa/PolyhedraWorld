@@ -1,56 +1,44 @@
-using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
 public class ColorChanger : MonoBehaviour {
-    [SerializeField] private Color _endColor = Color.clear;
-    [SerializeField] private float _duration = 1f;
+    [SerializeField] private float _duration = 0.3f;
 
     private Material _material;
     private Color _startColor;
-    private Coroutine _fadeRoutine;
+    private Color _endColor = Color.white;
+
+    private Tween _colorTween;
 
     public void Init(Material material) {
         _material = material;
         _startColor = material.color;
-        StartChangingColor();
     }
 
     public void StartChangingColor() {
-        if (_fadeRoutine != null)
-            StopCoroutine(_fadeRoutine);
-
-        _fadeRoutine = StartCoroutine(FadeColor(_endColor));
+        _colorTween = _material.DOColor(_endColor, _duration / 2f)
+            .SetLoops(-1, LoopType.Yoyo)
+            .SetEase(Ease.InOutSine);
     }
 
     public void StopChangingColor() {
-        if (_fadeRoutine != null) {
-            StopCoroutine(_fadeRoutine);
-
-            _material.color = _startColor;
-        }
+        _material.color = _startColor;
+        _colorTween.Kill();
     }
 
-    private void Update() {
-        if (_fadeRoutine == null)
-            return;
+    private Color GetNewColor(float time) {
+        Color newColor = Color.clear;
+        float max = Mathf.Max(_material.color.r, _material.color.g, _material.color.b);
+        float colorOffset = Mathf.Sin(30 * time) * 0.5f + 0.5f;
 
-        if (_material.color == _startColor) {
-            StartCoroutine(FadeColor(_endColor));
-        }
-        else if (_material.color == _endColor) {
-            StartCoroutine(FadeColor(_startColor));
-        }
-    }
-
-    private IEnumerator FadeColor(Color targetColor) {
-        float time = 0;
-
-        while (time < _duration) {
-            _material.color = Color.Lerp(_material.color, targetColor, time / _duration);
-            time += Time.deltaTime;
-            yield return null;
+        if (max == _material.color.r) {
+            newColor = new Color(colorOffset, 0, 0, 0);
+        } else if (max == _material.color.g) {
+            newColor = new Color(0, colorOffset, 0, 0);
+        } else if (max == _material.color.b) {
+            newColor = new Color(0, 0, colorOffset, 0);
         }
 
-        _material.color = targetColor;
+        return newColor;
     }
 }

@@ -26,8 +26,6 @@ public class DialogSwitcherView : UICompanent, IDisposable {
         ÑonfigureÑomponents();
     }
 
-    public void Show(bool status) => gameObject.SetActive(status);
-
     private void CrateSelectorViews() {
        _selectors = new List<SelectorView>();
 
@@ -58,7 +56,7 @@ public class DialogSwitcherView : UICompanent, IDisposable {
         ActiveSelectorChanged?.Invoke(selector);
     }
 
-    public void Dispose() {
+    public override void Dispose() {
         foreach (var iSelector in _selectors) {
             iSelector.Selected -= OnSelected;
         }

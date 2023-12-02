@@ -3,20 +3,21 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "PolyhedraModelFactory", menuName = "Factory/PolyhedraModelFactory")]
 public class PolyhedraModelFactory : ScriptableObject {
-    [SerializeField] private PolyhedraModelConfigs _modelConfigs;
+    private PolyhedraModelConfigs _modelConfigs;
 
-    public PolyhedraModel Get(PolyhedraDescription description, Transform parent) {
-        PolyhedraModelConfig config = GetModelConfig(description);
+    public void Init(PolyhedraModelConfigs modelConfigs) {
+        _modelConfigs = modelConfigs;
+    }
+
+    public PolyhedraModel Get(PolyhedraTypes type, Transform parent) {
+        PolyhedraModelConfig config = GetModelConfig(type);
         PolyhedraModel model = Instantiate(config.ModelPrefab, parent);
 
         return model;
     }
 
-    private PolyhedraModelConfig GetModelConfig(PolyhedraDescription description) {
-        PolyhedraModelConfig config = _modelConfigs.List.FirstOrDefault(model =>
-                model.Class == description.Class
-                && model.Type == description.Type);
-
+    private PolyhedraModelConfig GetModelConfig(PolyhedraTypes type) {
+        PolyhedraModelConfig config = _modelConfigs.List.FirstOrDefault(model => model.Type == type);
         return config;
     }
 }

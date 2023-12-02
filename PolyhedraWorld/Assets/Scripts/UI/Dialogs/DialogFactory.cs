@@ -11,7 +11,7 @@ public class DialogFactory : ScriptableObject {
 
     private static readonly Dictionary<Type, string> _prefabsDictionary = new Dictionary<Type, string>() {
             {typeof(DesktopDialog),"DesktopDialog"},
-            {typeof(ChaptersDialog),"ChaptersDialog"},
+            {typeof(PolyhedrasDialog),"PolyhedrasDialog"},
             {typeof(SpecificationDialog),"SpecificationDialog"},
             {typeof(SettingsDialog),"SettingsDialog"},
             {typeof(AboutDialog),"AboutDialog"},
@@ -21,13 +21,13 @@ public class DialogFactory : ScriptableObject {
         _dialogsParent = dialogsParent;
     }
 
-    public T GetDialog<T>(RectTransform parent) where T : Dialog {
+    public T GetDialog<T>() where T : Dialog {
         var go = GetPrefabByType<T>();
 
         if (go == null)
             return null;
 
-        return (T)Instantiate<Dialog>(go, parent);
+        return (T)Instantiate<Dialog>(go, _dialogsParent);
     }
 
     private T GetPrefabByType<T>() where T : Dialog {

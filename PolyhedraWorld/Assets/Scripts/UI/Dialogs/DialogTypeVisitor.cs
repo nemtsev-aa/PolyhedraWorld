@@ -14,11 +14,9 @@ public class DialogTypeVisitor : IDialogTypeVisitor {
 
     public void Visit(DesktopDialog desktop) => Dialog = _dialogs.FirstOrDefault(dialog => dialog is DesktopDialog);
 
-    public void Visit(ChaptersDialog transactions) => Dialog = _dialogs.FirstOrDefault(dialog => dialog is ChaptersDialog);
+    public void Visit(PolyhedrasDialog transactions) => Dialog = _dialogs.FirstOrDefault(dialog => dialog is PolyhedrasDialog);
 
     public void Visit(SpecificationDialog category) => Dialog = _dialogs.FirstOrDefault(dialog => dialog is SpecificationDialog);
-
-    public void Visit(FinancialGoalsDialog financialGoals) => Dialog = _dialogs.FirstOrDefault(dialog => dialog is FinancialGoalsDialog);
 
     public void Visit(SettingsDialog settingsDialog) => Dialog = _dialogs.FirstOrDefault(dialog => dialog is SettingsDialog);
 

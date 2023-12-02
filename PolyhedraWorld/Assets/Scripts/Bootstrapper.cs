@@ -1,22 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bootstrapper : MonoBehaviour {
     [SerializeField] private UIManager _uIManager;
-    [SerializeField] private DialogSelectorViewConfigs _selectorViewConfigs;
+    [SerializeField] private SmoothLookAt _smoothLookAt;
+    [SerializeField] private VisualEffectsManager _visualEffectsManager;
+
+    [SerializeField] private PolyhedraModelConfigs _polyhedraModelConfigs;
+    [SerializeField] private PolyhedrasModelSpawner _modelSpawner;
+    [SerializeField] private PolyhedraModelFactory _modelFactory;
+
+    [SerializeField] private PolyhedraConfigs _polyhedraConfigs;
 
     [SerializeField] private DialogFactory _dialogFactory;
     [SerializeField] private UICompanentsFactory _companentsFactory;
 
-    private DialogMediator _dialogMediator;
-    private DialogSwitcher _dialogSwitcher;
-
     private void Start() {
-        
-        _dialogSwitcher = new DialogSwitcher(_dialogFactory, _uIManager.DialogsParent, _uIManager.SwitcherView);
-        _dialogMediator = new DialogMediator(_dialogSwitcher);
+        _uIManager.Init(_companentsFactory, _dialogFactory, _polyhedraConfigs);
+        _smoothLookAt.Init(_uIManager);
 
-        _uIManager.Init(_selectorViewConfigs, _companentsFactory, _dialogSwitcher, _dialogMediator);
+        _modelFactory.Init(_polyhedraModelConfigs);
+        _modelSpawner.Init(_modelFactory, _polyhedraConfigs);
+        _modelSpawner.StartWork();
+
+        _visualEffectsManager.Init(_uIManager, _modelSpawner);
     }
 }

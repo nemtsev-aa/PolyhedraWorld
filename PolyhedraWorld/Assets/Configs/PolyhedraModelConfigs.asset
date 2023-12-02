@@ -14,12 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _modelConfigs:
   - <Class>k__BackingField: 0
+    <Type>k__BackingField: 1
+    <ModelPrefab>k__BackingField: {fileID: 3912014951838751026, guid: c58ed4fca7311ca47a7f2154cf96757f,
+      type: 3}
+  - <Class>k__BackingField: 0
     <Type>k__BackingField: 0
     <ModelPrefab>k__BackingField: {fileID: 4213132438748539906, guid: 948de027771c74b418bf883304caabc0,
       type: 3}
   - <Class>k__BackingField: 0
-    <Type>k__BackingField: 0
-    <ModelPrefab>k__BackingField: {fileID: 0}
+    <Type>k__BackingField: 2
+    <ModelPrefab>k__BackingField: {fileID: 210937186934437148, guid: a9f62d1f86fe73c4da927d50919de874,
+      type: 3}
   - <Class>k__BackingField: 0
-    <Type>k__BackingField: 0
-    <ModelPrefab>k__BackingField: {fileID: 0}
+    <Type>k__BackingField: 3
+    <ModelPrefab>k__BackingField: {fileID: 5156349169561956084, guid: 901be681cd1ba5e4fbb288dd4896b1ee,
+      type: 3}
+  - <Class>k__BackingField: 0
+    <Type>k__BackingField: 4
+    <ModelPrefab>k__BackingField: {fileID: 2286597036692853361, guid: caff26f6dc564294fbf072f22d881889,
+      type: 3}

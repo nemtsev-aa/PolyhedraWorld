@@ -1,49 +1,70 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour, IDisposable {
-    private DialogSelectorViewConfigs _selectorViewConfigs;
+    public event Action<PolyhedraConfig> ModelsRotated;
+    public event Action<PolyhedrasCompanentTypes> CompanentBlinked;
+
+    [SerializeField] private RectTransform _dialogsParent;
+    
     private UICompanentsFactory _companentsFactory;
+    private DialogFactory _dialogFactory;
+    private PolyhedraConfigs _polyhedraConfigs;
+
     private DialogSwitcher _dialogSwitcher;
     private DialogMediator _dialogMediator;
 
-    private List<Dialog> _dialogs;
+    private Dictionary<DialogTypes, Dialog> _dialogsDictionary;
     
-    [field: SerializeField] public RectTransform DialogsParent { get; private set; }
-    [field: SerializeField] public DialogSwitcherView SwitcherView { get; private set; }
-    
-    public void Init(DialogSelectorViewConfigs selectorViewConfigs, UICompanentsFactory companentsFactory, DialogSwitcher dialogSwitcher, DialogMediator dialogMedialor) {
-        _selectorViewConfigs = selectorViewConfigs;
+    public void Init(UICompanentsFactory companentsFactory, DialogFactory dialogFactory, PolyhedraConfigs polyhedraConfigs) {
         _companentsFactory = companentsFactory;
-        _dialogSwitcher = dialogSwitcher;
-        _dialogMediator = dialogMedialor;
+        _dialogFactory = dialogFactory;
+        _dialogFactory.Init(_dialogsParent);
+        CreateDialogs();
 
-        InitializationCompanents();
-        AddListeners();
+        _polyhedraConfigs = polyhedraConfigs;
+        _dialogSwitcher = new DialogSwitcher(this);
+        _dialogMediator = new DialogMediator(this, _dialogSwitcher, _polyhedraConfigs);
+        _dialogMediator.PolyhedraSelected += OnPolyhedraSelected;
+        _dialogMediator.PolyhedraCompanentSelected += OnPolyhedraCompanentSelected;
+
+        _dialogSwitcher.ShowDialog(DialogTypes.Desktop);
     }
 
-    private void InitializationCompanents() {       
-        _dialogs = _dialogSwitcher.GetDialogList();
+    public Dialog GetDialogByType(DialogTypes type) {
+        if (_dialogsDictionary.Keys.Count == 0)
+            throw new ArgumentNullException("DialogsDictionary is empty");
 
-        SwitcherView.Init(_selectorViewConfigs, _companentsFactory);
+        return _dialogsDictionary[type];
     }
 
-    private void AddListeners() {
-        foreach (var iDialog in _dialogs) {
-            iDialog.ShowDialogSwitcherSelected += OnShowDialogSwitcherSelected;
+    public List<Dialog> GetDialogList() {
+        return _dialogsDictionary.Values.ToList();
+    }
+
+    private void CreateDialogs() {
+        _dialogsDictionary = new Dictionary<DialogTypes, Dialog> {
+            { DialogTypes.Desktop, _dialogFactory.GetDialog<DesktopDialog>()},
+            { DialogTypes.Polyhedras, _dialogFactory.GetDialog<PolyhedrasDialog>()},
+            { DialogTypes.Specification, _dialogFactory.GetDialog<SpecificationDialog>()},
+            { DialogTypes.Settings, _dialogFactory.GetDialog<SettingsDialog>()},
+            { DialogTypes.About, _dialogFactory.GetDialog<AboutDialog>()}
+        };
+
+        foreach (var iDialog in _dialogsDictionary.Values) {
+            iDialog.Init();
+            iDialog.Close();
         }
     }
 
-    private void OnShowDialogSwitcherSelected() => SwitcherView.Show(true);
+    private void OnPolyhedraSelected(PolyhedraConfig config) => ModelsRotated?.Invoke(config);
 
-    private void RemoveListeners() {
-        foreach (var iDialog in _dialogs) {
-            iDialog.ShowDialogSwitcherSelected -= OnShowDialogSwitcherSelected;
-        }
-    }
+    private void OnPolyhedraCompanentSelected(PolyhedrasCompanentTypes type) => CompanentBlinked?.Invoke(type);
 
     public void Dispose() {
-        RemoveListeners();
+        _dialogMediator.PolyhedraSelected -= OnPolyhedraSelected;
+        _dialogMediator.PolyhedraCompanentSelected -= OnPolyhedraCompanentSelected;
     }
 }

@@ -1,6 +1,6 @@
 public enum DialogTypes {
     Desktop,
-    Chapters,
+    Polyhedras,
     Specification,
     Settings,
     About

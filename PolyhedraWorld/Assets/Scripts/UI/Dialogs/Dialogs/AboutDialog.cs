@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class AboutDialog : Dialog {
 
-    public override void Init(DialogMediator mediator) {
-        base.Init(mediator);
-
-        IsInit = true;
+    public override void Init() {
+        base.Init();
     }
 
     public override void AddListeners() {

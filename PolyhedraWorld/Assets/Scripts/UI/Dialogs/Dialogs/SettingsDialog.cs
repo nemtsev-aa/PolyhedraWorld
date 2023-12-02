@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SettingsDialog : Dialog {
-    public override void Init(DialogMediator mediator) {
-        base.Init(mediator);
+    public override void Init() {
 
+        AddListeners();
         IsInit = true;
     }
 

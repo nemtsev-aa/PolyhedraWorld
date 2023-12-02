@@ -1,19 +1,58 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System;
 
 public class PolyhedraModel : MonoBehaviour {
     [SerializeField] private List<PolyhedrasElement> _elements;
-    private PolyhedrasElement _element;
+    
+    private PolyhedrasElement _blinkedElement;
 
-    public void ShowVertexes(bool status) => ShowElements<Vertex>(status);
-    public void ShowEdges(bool status) => ShowElements<Edge>(status);
-    public void ShowPlanes(bool status) => ShowElements<Plane>(status);
+    public PolyhedraConfig Config { get; private set; }
+    
+    public void Init(PolyhedraConfig config) {
+        Config = config;
 
-    private void ShowElements<T>(bool status) where T : PolyhedrasElement {
-        if (status == true) 
-            _element = _elements.FirstOrDefault(element => element is T);
+        foreach (var iElement in _elements) {
+            iElement.Init();
+        }      
+    }
 
-        _element.Show(status);
+    public void BlinkCompanent(PolyhedrasCompanentTypes type) {
+        HideBlink();
+
+        switch (type) {
+            case PolyhedrasCompanentTypes.Edge:
+                ShowElements<Edge>();
+                break;
+
+            case PolyhedrasCompanentTypes.Vertex:
+                ShowElements<Vertex>();
+                break;
+
+            case PolyhedrasCompanentTypes.Plane:
+                ShowElements<Plane>();
+                break;
+
+            default:
+                throw new ArgumentNullException($"Invalid PolyhedrasCompanentTypes: {type}");
+        }
+    }
+
+    private void HideBlink() {
+        foreach (var iElement in _elements) {
+            if (iElement.IsBlink == true) {
+                iElement.Show(false);
+            }
+        }
+    }
+
+    private void ShowElements<T>() where T : PolyhedrasElement {
+        PolyhedrasElement element = _elements.FirstOrDefault(element => element is T);
+
+        if (element.IsBlink == false) {
+            element.Show(true);
+            _blinkedElement = element;
+        }
     }
 }

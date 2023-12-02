@@ -1,34 +1,46 @@
 using System;
-using UnityEngine;
 
 public class DesktopDialog : Dialog {
-    private DialogMediator _dialogMediator;
+    public event Action PolyhedrasDialogShowed;
+    public event Action SettingsDialogShowed;
+    public event Action AboutDialogShowed;
+    public event Action Quited;
 
-    public override void Init(DialogMediator mediator) {
-        if (IsInit == true)
-            return;
+    private MenuCategoryPanel _category;
 
-        base.Init(mediator);
-        _dialogMediator = mediator;
+    public override void Init() {
+        base.Init();
+    }
 
-        
-
-        IsInit = true;
-        UpdateWidgets();
+    public override void InitializationPanels() {
+        _category = GetPanelByType<MenuCategoryPanel>();
+        _category.Init();
     }
 
     public override void AddListeners() {
         base.AddListeners();
 
-        
+        _category.PolyhedrasDialogSelected += OnPolyhedrasDialogSelected;
+        _category.SettingsDialogSelected += OnSettingsDialogSelected;
+        _category.AboutDialogSelected += OnAboutDialogSelected;
+        _category.QuitButtonSelected += OnQuitButtonSelected;
     }
-
-    public void UpdateWidgets() { }
-
 
     public override void RemoveListeners() {
         base.RemoveListeners();
 
-        
+        _category.PolyhedrasDialogSelected -= OnPolyhedrasDialogSelected;
+        _category.SettingsDialogSelected -= OnSettingsDialogSelected;
+        _category.AboutDialogSelected -= OnAboutDialogSelected;
+        _category.QuitButtonSelected -= OnQuitButtonSelected;
     }
+
+
+    private void OnPolyhedrasDialogSelected() => PolyhedrasDialogShowed?.Invoke();
+
+    private void OnSettingsDialogSelected() => SettingsDialogShowed?.Invoke();
+
+    private void OnAboutDialogSelected() => AboutDialogShowed?.Invoke();
+
+    private void OnQuitButtonSelected() => Quited?.Invoke();
 }

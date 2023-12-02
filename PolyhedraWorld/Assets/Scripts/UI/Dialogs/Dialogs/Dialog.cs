@@ -6,19 +6,23 @@ using UnityEngine.UI;
 
 public abstract class Dialog : MonoBehaviour, IDisposable {
     public event Action OnClosed;
-    public event Action ShowDialogSwitcherSelected;
+    public event Action BackClicked;
 
-    [SerializeField] protected Button ShowDialogSwitcher;
+    [SerializeField] protected Button BackButton;
     [SerializeField] protected List<UIPanel> Panels = new List<UIPanel>();
 
     protected DialogMediator Mediator;
 
     public bool IsInit { get; protected set; } = false;
     
-    public virtual void Init(DialogMediator mediator) {
-        Mediator = mediator;
+    public virtual void Init() {
+        if (IsInit == true)
+            return;
 
+        InitializationPanels();
         AddListeners();
+
+        IsInit = true;
     }
 
     public virtual void Show(bool value) {
@@ -37,19 +41,23 @@ public abstract class Dialog : MonoBehaviour, IDisposable {
         OnClosed?.Invoke();
     }
 
+    public virtual void InitializationPanels() {
+
+    }
+
     public virtual void AddListeners() {
-        ShowDialogSwitcher.onClick.AddListener(ShowDialogSwitcherClick);
+        BackButton.onClick.AddListener(BackButtonClick);
     }
 
     public virtual void RemoveListeners() {
-        ShowDialogSwitcher.onClick.RemoveListener(ShowDialogSwitcherClick);
+        BackButton.onClick.RemoveListener(BackButtonClick);
     }
 
     public virtual T GetPanelByType<T>() where T : UIPanel {
         return (T)Panels.FirstOrDefault(panel => panel is T);
     }
 
-    private void ShowDialogSwitcherClick() => ShowDialogSwitcherSelected?.Invoke();
+    private void BackButtonClick() => BackClicked?.Invoke();
    
     public void Dispose() {
         RemoveListeners();
