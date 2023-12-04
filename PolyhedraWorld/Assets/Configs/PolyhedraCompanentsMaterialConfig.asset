@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdcdf661e826d294dacf9d8ea5224931, type: 3}
+  m_Name: PolyhedraCompanentsMaterialConfig
+  m_EditorClassIdentifier: 
+  EdgeMaterial: {fileID: 2100000, guid: 9aa1ebdfceac6c44da4ede8d64c36c20, type: 2}
+  VertexMaterial: {fileID: 2100000, guid: 2770c27d36ae5a34c84fae65fe4d53b3, type: 2}
+  PlaneMaterial: {fileID: 2100000, guid: 08062d93ff2998145ad30ee47c11e1a5, type: 2}
+  <Colors>k__BackingField:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.24676108, b: 0, a: 1}
+  - {r: 1, g: 0.75964546, b: 0, a: 1}
+  - {r: 0.05724919, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0.7715509, b: 1, a: 1}
+  - {r: 0, g: 0.11260891, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0.78583336, a: 1}

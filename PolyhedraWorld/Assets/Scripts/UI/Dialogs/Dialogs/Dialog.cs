@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class Dialog : MonoBehaviour, IDisposable {
-    public event Action OnClosed;
     public event Action BackClicked;
 
     [SerializeField] protected Button BackButton;
@@ -34,11 +33,6 @@ public abstract class Dialog : MonoBehaviour, IDisposable {
 
         panel.UpdateContent();
         panel.Show(value);
-    }
-
-    public virtual void Close() {
-        gameObject.SetActive(false);
-        OnClosed?.Invoke();
     }
 
     public virtual void InitializationPanels() {

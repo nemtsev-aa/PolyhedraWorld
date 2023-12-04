@@ -6,6 +6,7 @@ public class Bootstrapper : MonoBehaviour {
     [SerializeField] private VisualEffectsManager _visualEffectsManager;
 
     [SerializeField] private PolyhedraModelConfigs _polyhedraModelConfigs;
+    [SerializeField] private PolyhedraCompanentsMaterialConfig _materialConfig;
     [SerializeField] private PolyhedrasModelSpawner _modelSpawner;
     [SerializeField] private PolyhedraModelFactory _modelFactory;
 
@@ -13,15 +14,22 @@ public class Bootstrapper : MonoBehaviour {
 
     [SerializeField] private DialogFactory _dialogFactory;
     [SerializeField] private UICompanentsFactory _companentsFactory;
+    [SerializeField] private JoysticInputHandler _handler;
 
     private void Start() {
-        _uIManager.Init(_companentsFactory, _dialogFactory, _polyhedraConfigs);
+        Logger.Instance.Log("Начало метода [Bootstrapper: Start]");
+
+        _uIManager.Init(_companentsFactory, _dialogFactory, _polyhedraConfigs, _materialConfig);
         _smoothLookAt.Init(_uIManager);
 
         _modelFactory.Init(_polyhedraModelConfigs);
-        _modelSpawner.Init(_modelFactory, _polyhedraConfigs);
+        
+        _handler.Init(_uIManager);
+        _modelSpawner.Init(_modelFactory, _polyhedraConfigs, _handler, _materialConfig);
         _modelSpawner.StartWork();
 
         _visualEffectsManager.Init(_uIManager, _modelSpawner);
+
+        Logger.Instance.Log("Конец метода [Bootstrapper: Start]");
     }
 }

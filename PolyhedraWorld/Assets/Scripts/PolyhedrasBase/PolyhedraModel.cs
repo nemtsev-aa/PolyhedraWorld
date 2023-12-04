@@ -1,58 +1,90 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using System;
 
 public class PolyhedraModel : MonoBehaviour {
-    [SerializeField] private List<PolyhedrasElement> _elements;
-    
-    private PolyhedrasElement _blinkedElement;
+    [SerializeField] private List<PolyhedraElement> _elements;
+    private ModelStateMachine _stateMachine;
+    private PolyhedraElement _selectedElement;
 
     public PolyhedraConfig Config { get; private set; }
-    
-    public void Init(PolyhedraConfig config) {
-        Config = config;
+    public ModelInput Input { get; private set; }
 
+    private PolyhedraCompanentsMaterialConfig _materialConfig;
+
+    public Transform Transform => gameObject.transform;
+    public MoveStateMachineData MoveStateData { get; set; }
+
+    private void Awake() {
+        MoveStateData = new MoveStateMachineData();
+        _stateMachine = new ModelStateMachine(this, MoveStateData);
+    }
+
+    public void Init(PolyhedraConfig config, ModelInput input, PolyhedraCompanentsMaterialConfig materialConfig) {
+        Config = config;
+        Input = input;
+        _materialConfig = materialConfig;
+        _materialConfig.ConfigChanged += OnConfigChanged;
+
+        InitializationElements();
+    }
+
+    public void EnableInput(bool status) {
+        if (status)
+            Input.Enable();
+        else
+            Input.Disable();
+    }
+
+    public void RestoreOriginalViewState() {
         foreach (var iElement in _elements) {
-            iElement.Init();
-        }      
+           iElement.Reset();
+        }
     }
 
     public void BlinkCompanent(PolyhedrasCompanentTypes type) {
-        HideBlink();
+        _selectedElement = GetElements(type);
 
+        foreach (var iElement in _elements) {
+            if (_selectedElement.Equals(iElement))
+                iElement.Selected(true);
+            else
+                iElement.Selected(false);
+        }
+    }
+
+    private void Update() {
+        _stateMachine.HandleInput();
+        _stateMachine.Update();
+    }
+
+    private void InitializationElements() {
+        foreach (var iElement in _elements) {
+            if (iElement is Edge)
+                iElement.Init(_materialConfig.GetMaterialByCompanentType(PolyhedrasCompanentTypes.Edge));
+
+            if (iElement is Vertex)
+                iElement.Init(_materialConfig.GetMaterialByCompanentType(PolyhedrasCompanentTypes.Vertex));
+
+            if (iElement is Plane)
+                iElement.Init(_materialConfig.GetMaterialByCompanentType(PolyhedrasCompanentTypes.Plane));
+        }
+    }
+
+    private PolyhedraElement GetElements(PolyhedrasCompanentTypes type) {
         switch (type) {
             case PolyhedrasCompanentTypes.Edge:
-                ShowElements<Edge>();
-                break;
+                return _elements.Find(element => element is Edge);
 
             case PolyhedrasCompanentTypes.Vertex:
-                ShowElements<Vertex>();
-                break;
+                return _elements.Find(element => element is Vertex);
 
             case PolyhedrasCompanentTypes.Plane:
-                ShowElements<Plane>();
-                break;
-
+                return _elements.Find(element => element is Plane);
             default:
                 throw new ArgumentNullException($"Invalid PolyhedrasCompanentTypes: {type}");
         }
     }
 
-    private void HideBlink() {
-        foreach (var iElement in _elements) {
-            if (iElement.IsBlink == true) {
-                iElement.Show(false);
-            }
-        }
-    }
-
-    private void ShowElements<T>() where T : PolyhedrasElement {
-        PolyhedrasElement element = _elements.FirstOrDefault(element => element is T);
-
-        if (element.IsBlink == false) {
-            element.Show(true);
-            _blinkedElement = element;
-        }
-    }
+    private void OnConfigChanged() => InitializationElements();
 }

@@ -1,8 +1,12 @@
 using System;
+using UnityEngine;
 
 public class SpecificationDialog : Dialog {
     public event Action<PolyhedraConfig> PolyhedraConfigChanged;
     public event Action<PolyhedrasCompanentTypes> PolyhedraCompanentSelected;
+    public event Action<float, float> JoysticValueChanged;
+
+    [SerializeField] private DynamicJoystick _joystick;
 
     private ToolsPanel _toolsPanel;
     private ViewsManager _viewsManager;
@@ -25,6 +29,7 @@ public class SpecificationDialog : Dialog {
 
         _toolsPanel.ToolSelected += OnToolSelected;
         _viewsManager.PolyhedrasCompanentBlinked += OnPolyhedrasCompanentBlinked;
+        _joystick.JoysticDrag += OnJoysticDrag;
     }
 
     public override void RemoveListeners() {
@@ -39,8 +44,9 @@ public class SpecificationDialog : Dialog {
         PolyhedraConfigChanged?.Invoke(_config);
     }
 
-    private void OnToolSelected(Type type) => _viewsManager.ShowViewByType(type);
+    private void OnJoysticDrag(float horizontal, float vertical) => JoysticValueChanged?.Invoke(horizontal, vertical);
 
+    private void OnToolSelected(Type type) => _viewsManager.ShowViewByType(type);
 
     private void OnPolyhedrasCompanentBlinked(PolyhedrasCompanentTypes type) => PolyhedraCompanentSelected?.Invoke(type);
 }

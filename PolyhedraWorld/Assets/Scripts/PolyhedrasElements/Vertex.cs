@@ -1,3 +1,3 @@
-public class Vertex : PolyhedrasElement {
+public class Vertex : PolyhedraElement {
 
 }

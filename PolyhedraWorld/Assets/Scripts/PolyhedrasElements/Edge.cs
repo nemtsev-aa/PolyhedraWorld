@@ -1,3 +1,3 @@
-public class Edge : PolyhedrasElement {
+public class Edge : PolyhedraElement {
 
 }

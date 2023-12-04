@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3832938120614107309}
-  - component: {fileID: 8406198270625319810}
   - component: {fileID: 8678189080142830655}
   m_Layer: 0
   m_Name: Vertexs
@@ -34,19 +33,6 @@ Transform:
   m_Father: {fileID: 8347477427735049343}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8406198270625319810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1668171127737962267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 135c9345d6296c34aaa9396823e8d10a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _duration: 1
 --- !u!114 &8678189080142830655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,7 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Material: {fileID: 2100000, guid: 2770c27d36ae5a34c84fae65fe4d53b3, type: 2}
   Renderer: {fileID: 8905461737662537552}
-  ColorChanger: {fileID: 8406198270625319810}
 --- !u!1 &2640921442609620406
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +139,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1832600221949879700}
-  - component: {fileID: 1267258275125054790}
   - component: {fileID: 4647978685481645344}
   m_Layer: 0
   m_Name: Edges
@@ -179,19 +163,6 @@ Transform:
   m_Father: {fileID: 8347477427735049343}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1267258275125054790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3877410636524580127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 135c9345d6296c34aaa9396823e8d10a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _duration: 1
 --- !u!114 &4647978685481645344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,7 +177,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Material: {fileID: 2100000, guid: 9aa1ebdfceac6c44da4ede8d64c36c20, type: 2}
   Renderer: {fileID: 6805509116531358379}
-  ColorChanger: {fileID: 1267258275125054790}
 --- !u!1 &6603945882753935700
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +186,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8581053503813319862}
-  - component: {fileID: 1440030991135833853}
   - component: {fileID: 8679996908598260528}
   m_Layer: 0
   m_Name: Planes
@@ -241,19 +210,6 @@ Transform:
   m_Father: {fileID: 8347477427735049343}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1440030991135833853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6603945882753935700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 135c9345d6296c34aaa9396823e8d10a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _duration: 1
 --- !u!114 &8679996908598260528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +224,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Material: {fileID: 2100000, guid: 08062d93ff2998145ad30ee47c11e1a5, type: 2}
   Renderer: {fileID: 2678842231220262776}
-  ColorChanger: {fileID: 1440030991135833853}
 --- !u!1001 &1296705674071472191
 PrefabInstance:
   m_ObjectHideFlags: 0

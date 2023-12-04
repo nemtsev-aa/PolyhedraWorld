@@ -20,6 +20,8 @@ public class PolyhedrasDialog : Dialog {
     }
 
     public override void InitializationPanels() {
+        Logger.Instance.Log($"Начало метода [PolyhedrasDialog: InitializationPanels]");
+
         _polyhedrasPanel = GetPanelByType<PolyhedrasPanel>();
         _polyhedrasPanel.Init(_polyhedraConfigs, _companentsFactory);
         _polyhedrasPanel.Show(true);

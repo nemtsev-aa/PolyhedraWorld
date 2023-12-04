@@ -9,6 +9,7 @@ public class DesktopDialog : Dialog {
     private MenuCategoryPanel _category;
 
     public override void Init() {
+        Logger.Instance.Log("Начало метода [DesktopDialog : Init]");
         base.Init();
     }
 

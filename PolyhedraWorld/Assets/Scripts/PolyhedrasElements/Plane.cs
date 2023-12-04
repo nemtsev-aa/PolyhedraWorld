@@ -1,3 +1,3 @@
-public class Plane : PolyhedrasElement {
+public class Plane : PolyhedraElement {
 
 }

@@ -11,10 +11,16 @@ public class PolyhedrasModelSpawner : ObjectsSpawnerBase {
     private PolyhedraModelFactory _modelFactory;
     private PolyhedraConfigs _configs;
     private List<PolyhedraModel> _models;
+    private JoysticInputHandler _handler;
+    private PolyhedraCompanentsMaterialConfig _materialConfig;
 
-    public void Init(PolyhedraModelFactory modelFactory, PolyhedraConfigs configs) {
+    public void Init(PolyhedraModelFactory modelFactory, PolyhedraConfigs configs,
+                        JoysticInputHandler handler, PolyhedraCompanentsMaterialConfig materialConfig) {
+        
         _modelFactory = modelFactory;
         _configs = configs;
+        _handler = handler;
+        _materialConfig = materialConfig;
     }
 
     public PolyhedraModel GetModelByType(PolyhedraTypes type) {
@@ -22,10 +28,9 @@ public class PolyhedrasModelSpawner : ObjectsSpawnerBase {
     }
 
     public override void Reset() {
-        StopWork();
-
-        if (_models != null)
-            ClearModelsList();
+        foreach (var iModel in _models) {
+            iModel.RestoreOriginalViewState();
+        }
     }
 
     protected override IEnumerator SpawnObjects() {
@@ -38,7 +43,9 @@ public class PolyhedrasModelSpawner : ObjectsSpawnerBase {
             PolyhedraTypes type = config.Type;
             
             PolyhedraModel model = _modelFactory.Get(type, transform);
-            model.Init(config);
+            ModelInput input = new ModelInput(_handler);
+
+            model.Init(config, input, _materialConfig);
             MoveModelToSpawnPoint(model, SpawnPoints[i]);
             
             _models.Add(model);

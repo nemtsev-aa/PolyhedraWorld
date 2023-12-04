@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: UICompanentsFactory
   m_EditorClassIdentifier: 
   _companents:
-  - {fileID: 6265241784632531051, guid: a24713490adae604abc49c4b01a78f06, type: 3}
   - {fileID: 4664568684643560831, guid: 393fada7c162c274f86ea074213b5e17, type: 3}
   - {fileID: 5671872889141740171, guid: 7f305b992cc5443418e7fcfa96d633bd, type: 3}
+  - {fileID: 3598663005756107823, guid: f52baa61cfe5adc42afb44fabe9b2df9, type: 3}

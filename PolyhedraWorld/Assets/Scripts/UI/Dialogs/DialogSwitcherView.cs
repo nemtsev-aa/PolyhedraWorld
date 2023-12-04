@@ -8,8 +8,8 @@ public class DialogSwitcherView : UICompanent, IDisposable {
     public event Action<SelectorView> ActiveSelectorChanged;
 
     [SerializeField] private RectTransform _selectorsParent;
-    [SerializeField] private Button _hideView
-        ;
+    [SerializeField] private Button _hideView;
+
     private DialogSelectorViewConfigs _selectorViewConfigs;
     private UICompanentsFactory _companentsFactory;
     private List<SelectorView> _selectors;
